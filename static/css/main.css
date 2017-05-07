@@ -1,3 +1,28 @@
 body {
     font-family: 'Roboto', sans-serif;
+    background: #e2e2e2
+}
+
+#forum {
+    width: 85%;
+    margin: auto;
+    background: white;
+    margin-top: 50px;
+    box-shadow: 4px 4px 12px 1px gray;
+}
+
+.topic {
+    background: #d32f2f;
+    height: 75px;
+    line-height: 75px;
+    color: white;
+    padding-left: 20px;
+}
+
+.topic:nth-child(even) {
+    background: #f44336;
+}
+
+.topic p {
+    margin: 0;
 }
