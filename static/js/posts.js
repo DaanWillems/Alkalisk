@@ -2,13 +2,13 @@ var app = new Vue({
     el: '#forum',
     data: function() {
         return{
-            topics: []
+            posts: []
         }
     },
     created: function () {
-        this.$http.get('/getTopics').then(function(response) {
+        this.$http.get('/getPosts').then(function(response) {
         console.log(response.data);
-            this.topics = response.data ? response.data : []
+            this.posts = response.data ? response.data : []
         })
     },
 })

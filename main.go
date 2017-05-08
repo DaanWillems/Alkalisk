@@ -1,7 +1,8 @@
 package main
 
-import "Alkalisk/cmd"
+import "Alkalisk/model"
 
 func main() {
-	cmd.StartServer()
+	//cmd.StartServer()
+	model.Migrate()
 }

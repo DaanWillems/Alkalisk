@@ -9,7 +9,7 @@ import (
 func StartApi(r *NanoRouter.Router) {
 	r.NewRoute("GET", "/", home)
 	r.NewRoute("GET", "/getPost/:id", getPost)
-	r.NewRoute("GET", "/getTopics", getTopics)
+	r.NewRoute("GET", "/getPosts", getPosts)
 }
 
 func home(w http.ResponseWriter, r *http.Request, vars map[string]string) {

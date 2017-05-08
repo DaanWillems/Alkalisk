@@ -31,8 +31,13 @@
         </ul>
        
         <div id="forum">
-            <div class="topic" v-for="topic in topics">
-                <p>{{ topic.Title }}</p>
+            <div class="topic" v-for="post in posts">
+                <div class="thumbnail">
+                    <div class="title">{{ post.Title }}</div>
+                    <div class="description">{{post.Content}}</div>
+                </div>
+                <i class="last-posted material-icons">access_time</i>
+                <i class="material-icons align-right">forum</i>
             </div>
         </div>
 
@@ -47,7 +52,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg=" crossorigin="anonymous"></script>
         <script src="/js/materialize.min.js"></script>
         <script src="js/app.js"></script>
-        <script src="js/topics.js"></script>
+        <script src="js/posts.js"></script>
 
     </body>
 </html>

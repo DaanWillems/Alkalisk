@@ -22,3 +22,16 @@ func getPost(w http.ResponseWriter, r *http.Request, vars map[string]string) {
 
 	fmt.Fprintf(w, string(response))
 }
+
+func getPosts(w http.ResponseWriter, r *http.Request, vars map[string]string) {
+	postRepository := model.PostRepository{}
+	posts := postRepository.All(0, 0)
+	response, err := json.Marshal(posts)
+
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
+
+	fmt.Fprintf(w, string(response))
+}

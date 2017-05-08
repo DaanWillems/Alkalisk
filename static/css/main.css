@@ -4,25 +4,51 @@ body {
 }
 
 #forum {
-    width: 85%;
+    width: 60%;
     margin: auto;
-    background: white;
     margin-top: 50px;
-    box-shadow: 4px 4px 12px 1px gray;
 }
 
 .topic {
-    background: #d32f2f;
+    position: relative;
+    background: white;
     height: 75px;
-    line-height: 75px;
-    color: white;
+    line-height: 55px;
+    color: black;
     padding-left: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-.topic:nth-child(even) {
-    background: #f44336;
+.thumbnail {
+    float: left;
+    width: 30%;
 }
 
-.topic p {
+.title, .description {
     margin: 0;
+    height: 20px;
+}
+
+.title {
+    font-size: 20px;
+    width: 30%;
+    margin-bottom: 5px;
+}
+
+.last-posted {
+    float: left;
+    font-size: 15px;
+    width: 30%;
+    margin-bottom: 5px;
+    margin-top: 30px;
+    color: dimgray;
+}
+
+.topic .align-right {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    cursor: pointer;
+    color: dimgray
 }
