@@ -9,10 +9,11 @@ import (
 )
 
 type Post struct {
-	Id          string
-	Title       string
-	Content     string
-	LastUpdated time.Time
+	Id            string
+	Title         string
+	Content       string
+	LastUpdated   time.Time
+	LastCommentAt time.Time
 }
 
 type PostRepository struct {
