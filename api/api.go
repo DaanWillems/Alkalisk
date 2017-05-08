@@ -13,5 +13,5 @@ func StartApi(r *NanoRouter.Router) {
 }
 
 func home(w http.ResponseWriter, r *http.Request, vars map[string]string) {
-	http.ServeFile(w, r, "view/home.html")
+	http.ServeFile(w, r, "../../view/home.html")
 }

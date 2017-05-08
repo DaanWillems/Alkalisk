@@ -12,7 +12,7 @@ type Post struct {
 	Id            string
 	Title         string
 	Content       string
-	LastUpdated   time.Time
+	CreatedAt     time.Time
 	LastCommentAt time.Time
 }
 
@@ -21,7 +21,7 @@ type PostRepository struct {
 }
 
 func (r *PostRepository) All(page int, amount int) []Post {
-	db, err := sql.Open("mysql", "root:@/alkaliskdb")
+	db, err := sql.Open("mysql", "root:@/alkaliskdb?parseTime=true")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,7 +31,7 @@ func (r *PostRepository) All(page int, amount int) []Post {
 	var posts []Post
 	for rows.Next() {
 		post := Post{}
-		rows.Scan(&post.Id, &post.Title, &post.Content)
+		rows.Scan(&post.Id, &post.Title, &post.Content, &post.CreatedAt, &post.LastCommentAt)
 		posts = append(posts, post)
 	}
 	return posts

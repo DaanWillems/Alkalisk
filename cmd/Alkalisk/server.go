@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"Alkalisk/api"
@@ -11,7 +11,7 @@ import (
 func StartServer() {
 	router := NanoRouter.NewRouter()
 
-	router.SetStaticPath("static/")
+	router.SetStaticPath("../../static/")
 	http.Handle("/", router)
 
 	api.StartApi(router)

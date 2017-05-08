@@ -2,7 +2,6 @@ package model
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 )
 
@@ -54,6 +53,5 @@ func Migrate() {
 
 	for _, v := range seed {
 		db.Exec(v)
-		fmt.Println("Executing: " + v)
 	}
 }

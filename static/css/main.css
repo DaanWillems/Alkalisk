@@ -13,7 +13,7 @@ body {
     position: relative;
     background: white;
     height: 75px;
-    line-height: 55px;
+    line-height: 75px;
     color: black;
     padding-left: 20px;
     margin-bottom: 20px;
@@ -22,7 +22,7 @@ body {
 
 .thumbnail {
     float: left;
-    width: 30%;
+    width: 200px;
 }
 
 .title, .description {
@@ -32,17 +32,16 @@ body {
 
 .title {
     font-size: 20px;
-    width: 30%;
     margin-bottom: 5px;
 }
 
 .last-posted {
     float: left;
     font-size: 15px;
-    width: 30%;
     margin-bottom: 5px;
     margin-top: 30px;
     color: dimgray;
+    margin-right: 20px;
 }
 
 .topic .align-right {

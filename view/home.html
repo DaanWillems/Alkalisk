@@ -31,14 +31,7 @@
         </ul>
        
         <div id="forum">
-            <div class="topic" v-for="post in posts">
-                <div class="thumbnail">
-                    <div class="title">{{ post.Title }}</div>
-                    <div class="description">{{post.Content}}</div>
-                </div>
-                <i class="last-posted material-icons">access_time</i>
-                <i class="material-icons align-right">forum</i>
-            </div>
+            <router-view></router-view>
         </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -51,8 +44,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/js/bootstrap-markdown.min.js" integrity="sha256-vT9X0tmmfKfNTg0U/Iv0rM9mhu8LA0MaDFrzIflHN9A=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg=" crossorigin="anonymous"></script>
         <script src="/js/materialize.min.js"></script>
-        <script src="js/app.js"></script>
         <script src="js/posts.js"></script>
-
+        <script src="js/comments.js"></script>
+        <script src="js/app.js"></script>
     </body>
 </html>
