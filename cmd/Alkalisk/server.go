@@ -13,7 +13,6 @@ func StartServer() {
 
 	router.SetStaticPath("../../static/")
 	http.Handle("/", router)
-
 	api.StartApi(router)
 
 	http.ListenAndServe(":8380", nil)

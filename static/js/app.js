@@ -2,15 +2,17 @@ $(document).ready(function(){
   $('.button-collapse').sideNav();
 });
 
-const routes = [
-  { path: '/comment', component: Comments },
-  { path: '/', component: Post }
+var routes = [
+  { path: '/', component: Forum },
+  { path: '/post/:id', component: Post },
+  { path: '*', redirect: '/'}
 ]
 
-const router = new VueRouter({
+var router = new VueRouter({
+  mode: 'history',
   routes // short for routes: routes
 })
 
-const app = new Vue({
+var app = new Vue({
   router
-}).$mount('#forum')
+}).$mount('#app')

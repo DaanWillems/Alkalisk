@@ -2,6 +2,7 @@ package model
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"time"
 
@@ -38,15 +39,19 @@ func (r *PostRepository) All(page int, amount int) []Post {
 }
 
 func (r *PostRepository) Get(id int) *Post {
-	db, err := sql.Open("mysql", "root:@/alkaliskdb")
+	db, err := sql.Open("mysql", "root:@/alkaliskdb?parseTime=true")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	p := r.New()
-	err = db.QueryRow("select * from posts where id = ?", id).Scan(&p.Id, &p.Title, &p.Content)
-	return p
+	post := r.New()
+	err = db.QueryRow("select * from posts where id = ?", id).Scan(&post.Id, &post.Title, &post.Content, &post.CreatedAt, &post.LastCommentAt)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("TESt: %v", post.Id)
+	return post
 }
 
 func (r *PostRepository) New() *Post {
