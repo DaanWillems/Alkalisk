@@ -8,14 +8,22 @@ var Post = Vue.component("forum", {
                 <img class="profile-pic" src="/img/anon.png">
                 <div id="title">{{post.Title}}</div><br>
             </div>
-            <div id="content">{{post.Content}}</div>
+            <div class="content">{{post.Content}}</div>
         </div>
         <div id="comments"> 
+            <div id="new-comment">
+                <div class="input-field col s12">
+                    <textarea id="new-comment-text" class="materialize-textarea"></textarea>
+                    <label for="new-comment-text">Type your comment here</label>
+                </div>
+                <div v-on:click="postComment" class="waves-effect waves-light btn">Comment</div>
+            </div>
             <div v-for="comment in comments" class="comment">
                 <div class="header">
                     <img class="profile-pic" src="/img/anon.png">
-                    <div id="title">{{comment.Title}}</div><br>
+                    <div id="title">{{comment.CreatedAt}}</div><br>
                 </div>
+                <div class="content">{{comment.Content}}</div><br>
             </div>
         </div>
     </div>
@@ -23,7 +31,7 @@ var Post = Vue.component("forum", {
     data: function() {
         return{
             post: {},
-            comments: [{"Title": "test"}, {"Title": "test1"}]
+            comments: []
         }
     },
     created: function () {
@@ -32,5 +40,32 @@ var Post = Vue.component("forum", {
         $.get("/getPost/"+id, function(data) {
             self.post = JSON.parse(data);
         })
+        $.get("/getComments/"+id, function(data) {
+            self.comments = JSON.parse(data);
+        })
+    },
+    methods: {
+        postComment: function() {
+            var self = this;
+            $.ajax({
+                type: "POST",
+                url: "/postComment/"+this.$route.params.id,
+                data: JSON.stringify({
+                    content: $("#new-comment-text").val(),
+                    id: self.$route.params.id
+                }),
+                success: function(data) {
+                    if(self.comments == null) {
+                        self.comments = [data]
+                        $("#new-comment-text").val("");
+                     } else {
+                        self.comments.unshift(data);
+                        $("#new-comment-text").val("");
+                     }
+                },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
+        } 
     } 
 })

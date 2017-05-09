@@ -54,6 +54,27 @@ func (r *PostRepository) Get(id int) *Post {
 	return post
 }
 
+func (r *PostRepository) GetCommentsFromPage(id int) []Comment {
+	fmt.Println("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeb")
+	db, err := sql.Open("mysql", "root:@/alkaliskdb?parseTime=true")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	rows, err := db.Query("select * from comments where post_id = ? order by created_at desc", id)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var comments []Comment
+	for rows.Next() {
+		comment := Comment{}
+		rows.Scan(&comment.Id, &comment.Content, &comment.PostId, &comment.CreatedAt)
+		comments = append(comments, comment)
+	}
+	return comments
+}
+
 func (r *PostRepository) New() *Post {
 	return &Post{}
 }
