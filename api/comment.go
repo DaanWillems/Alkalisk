@@ -23,7 +23,7 @@ func getComments(w http.ResponseWriter, r *http.Request, vars map[string]string)
 	fmt.Fprintf(w, string(response))
 }
 
-func postComment(w http.ResponseWriter, r *http.Request, vars map[string]string) {
+func newComment(w http.ResponseWriter, r *http.Request, vars map[string]string) {
 
 	CommentRepository := model.CommentRepository{}
 
@@ -40,7 +40,7 @@ func postComment(w http.ResponseWriter, r *http.Request, vars map[string]string)
 	}
 
 	id, _ := strconv.Atoi(req.Id)
-	comment := CommentRepository.CreateComment(req.Content, id)
+	comment := CommentRepository.New(req.Content, id)
 	response, err := json.Marshal(comment)
 	fmt.Fprintf(w, string(response))
 }

@@ -10,9 +10,10 @@ import (
 func StartApi(r *NanoRouter.Router) {
 	r.NewRoute("GET", "/", home)
 	r.NewRoute("GET", "/getComments/:id", getComments)
-	r.NewRoute("POST", "/postComment/:id", postComment)
+	r.NewRoute("POST", "/postComment/:id", newComment)
 	r.NewRoute("GET", "/getPost/:id", getPost)
 	r.NewRoute("GET", "/getPosts", getPosts)
+	r.NewRoute("POST", "/newPost", newPost)
 	r.SetNotFoundRoute(home)
 }
 

@@ -1,6 +1,7 @@
 var Forum = Vue.component("forum", {
     template: `
      <div id="forum">
+     <router-link :to="'/createPost'" ><a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a></router-link>
         <div id="posts">
             <div class="topic" v-for="post in posts">
                 <div class="thumbnail">

@@ -17,7 +17,7 @@ type CommentRepository struct {
 	db *sql.DB
 }
 
-func (r *CommentRepository) CreateComment(content string, post_id int) *Comment {
+func (r *CommentRepository) New(content string, post_id int) *Comment {
 	db, err := sql.Open("mysql", "root:@/alkaliskdb?parseTime=true")
 	if err != nil {
 		log.Fatal(err)

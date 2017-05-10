@@ -35,3 +35,24 @@ func getPosts(w http.ResponseWriter, r *http.Request, vars map[string]string) {
 
 	fmt.Fprintf(w, string(response))
 }
+
+func newPost(w http.ResponseWriter, r *http.Request, vars map[string]string) {
+	PostRepository := model.PostRepository{}
+
+	decoder := json.NewDecoder(r.Body)
+
+	req := struct {
+		Id      string `json:"id"`
+		Title   string `json:string`
+		Content string `json:"content"`
+	}{}
+
+	err := decoder.Decode(&req)
+	if err != nil {
+		panic(err)
+	}
+
+	comment := PostRepository.New(req.Title, req.Content)
+	response, err := json.Marshal(comment)
+	fmt.Fprintf(w, string(response))
+}

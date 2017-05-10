@@ -5,6 +5,7 @@ $(document).ready(function(){
 var routes = [
   { path: '/', component: Forum },
   { path: '/post/:id', component: Post },
+  { path: '/createPost', component: NewPost },
   { path: '*', redirect: '/'}
 ]
 

@@ -28,7 +28,7 @@ func (r *PostRepository) All(page int, amount int) []Post {
 	}
 	defer db.Close()
 
-	rows, err := db.Query("select * from posts")
+	rows, err := db.Query("select * from posts order by created_at desc")
 	var posts []Post
 	for rows.Next() {
 		post := Post{}
@@ -45,13 +45,13 @@ func (r *PostRepository) Get(id int) *Post {
 	}
 	defer db.Close()
 
-	post := r.New()
+	post := Post{}
 	err = db.QueryRow("select * from posts where id = ?", id).Scan(&post.Id, &post.Title, &post.Content, &post.CreatedAt, &post.LastCommentAt)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("TESt: %v", post.Id)
-	return post
+	return &post
 }
 
 func (r *PostRepository) GetCommentsFromPage(id int) []Comment {
@@ -75,8 +75,20 @@ func (r *PostRepository) GetCommentsFromPage(id int) []Comment {
 	return comments
 }
 
-func (r *PostRepository) New() *Post {
-	return &Post{}
+func (r *PostRepository) New(title string, content string) *Post {
+	db, err := sql.Open("mysql", "root:@/alkaliskdb?parseTime=true")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+	fmt.Println("test: " + title)
+	db.Exec(`INSERT INTO posts (id, title, content, created_at, last_comment_at) VALUES (NULL, ?, ?, now(), now());`, title, content)
+	post := Post{}
+	post.CreatedAt = time.Now()
+	post.LastCommentAt = time.Now()
+	post.Title = title
+	post.Content = content
+	return &post
 }
 
 func (r *PostRepository) Update(id int) {
