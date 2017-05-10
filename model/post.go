@@ -13,6 +13,7 @@ type Post struct {
 	Id            string
 	Title         string
 	Content       string
+	UserId        int
 	CreatedAt     time.Time
 	LastCommentAt time.Time
 }
@@ -32,7 +33,7 @@ func (r *PostRepository) All(page int, amount int) []Post {
 	var posts []Post
 	for rows.Next() {
 		post := Post{}
-		rows.Scan(&post.Id, &post.Title, &post.Content, &post.CreatedAt, &post.LastCommentAt)
+		rows.Scan(&post.Id, &post.Title, &post.Content, &post.CreatedAt, &post.UserId, &post.LastCommentAt)
 		posts = append(posts, post)
 	}
 	return posts
@@ -46,7 +47,7 @@ func (r *PostRepository) Get(id int) *Post {
 	defer db.Close()
 
 	post := Post{}
-	err = db.QueryRow("select * from posts where id = ?", id).Scan(&post.Id, &post.Title, &post.Content, &post.CreatedAt, &post.LastCommentAt)
+	err = db.QueryRow("select * from posts where id = ?", id).Scan(&post.Id, &post.Title, &post.Content, &post.CreatedAt, &post.UserId, &post.LastCommentAt)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -69,7 +70,7 @@ func (r *PostRepository) GetCommentsFromPage(id int) []Comment {
 	var comments []Comment
 	for rows.Next() {
 		comment := Comment{}
-		rows.Scan(&comment.Id, &comment.Content, &comment.PostId, &comment.CreatedAt)
+		rows.Scan(&comment.Id, &comment.Content, &comment.PostId, &comment.UserId, &comment.CreatedAt)
 		comments = append(comments, comment)
 	}
 	return comments
