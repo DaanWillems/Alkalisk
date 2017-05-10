@@ -24,7 +24,7 @@ func (r *CommentRepository) New(content string, post_id int) *Comment {
 		log.Fatal(err)
 	}
 	defer db.Close()
-	db.Exec(`INSERT INTO comments (id, content, post_id, created_at) VALUES (NULL, ?, ?, now());`, content, post_id)
+	db.Exec(`INSERT INTO comments (id, content, post_id, user_id, created_at) VALUES (NULL, ?, ?, 1, now());`, content, post_id)
 	comment := Comment{}
 	comment.CreatedAt = time.Now()
 	comment.Content = content

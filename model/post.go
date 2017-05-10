@@ -83,7 +83,7 @@ func (r *PostRepository) New(title string, content string) *Post {
 	}
 	defer db.Close()
 	fmt.Println("test: " + title)
-	db.Exec(`INSERT INTO posts (id, title, content, created_at, last_comment_at) VALUES (NULL, ?, ?, now(), now());`, title, content)
+	db.Exec(`INSERT INTO posts (id, title, content, created_at, user_id, last_comment_at) VALUES (NULL, ?, ?, now(), 1, now());`, title, content)
 	post := Post{}
 	post.CreatedAt = time.Now()
 	post.LastCommentAt = time.Now()
